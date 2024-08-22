@@ -1,0 +1,16 @@
+[project]
+name = "scapy-cip-enip"
+version = "0.1.0"
+description = "EtherNet/IP+CIP dissector for Scapy"
+readme = "README.rst"
+requires-python = ">=3.12" # check valid minimum version
+dependencies = [
+    "scapy==2.5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
