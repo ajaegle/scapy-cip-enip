@@ -26,9 +26,10 @@ in SUTD's secure water treatment testbed.
 """
 import struct
 
+import scapy.layers.inet
 from scapy import all as scapy_all
 
-import utils
+from . import utils
 
 # Keep-alive sequences
 ENIP_UDP_KEEPALIVE = (
@@ -80,7 +81,7 @@ class ENIP_UDP(scapy_all.Packet):
         return "", p
 
 
-scapy_all.bind_layers(scapy_all.UDP, ENIP_UDP, sport=2222, dport=2222)
+scapy_all.bind_layers(scapy.layers.inet.UDP, ENIP_UDP, sport=2222, dport=2222)
 scapy_all.bind_layers(ENIP_UDP_Item, ENIP_UDP_SequencedAddress, type_id=0x8002)
 
 if __name__ == '__main__':

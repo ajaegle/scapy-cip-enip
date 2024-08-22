@@ -22,9 +22,10 @@
 """Ethernet/IP over TCP scapy dissector"""
 import struct
 
+import scapy.layers.inet
 from scapy import all as scapy_all
 
-import utils
+from . import utils
 
 
 class ENIP_ConnectionAddress(scapy_all.Packet):
@@ -115,8 +116,8 @@ class ENIP_TCP(scapy_all.Packet):
         return p + pay
 
 
-scapy_all.bind_layers(scapy_all.TCP, ENIP_TCP, dport=44818)
-scapy_all.bind_layers(scapy_all.TCP, ENIP_TCP, sport=44818)
+scapy_all.bind_layers(scapy.layers.inet.TCP, ENIP_TCP, dport=44818)
+scapy_all.bind_layers(scapy.layers.inet.TCP, ENIP_TCP, sport=44818)
 
 scapy_all.bind_layers(ENIP_TCP, ENIP_RegisterSession, command_id=0x0065)
 scapy_all.bind_layers(ENIP_TCP, ENIP_SendRRData, command_id=0x006f)
